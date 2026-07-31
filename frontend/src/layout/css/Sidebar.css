@@ -10,6 +10,7 @@
   left: 0;
   top: 0;
   z-index: 40;
+  transition: transform 0.3s ease-in-out;
 }
 
 .sidebar-header {
@@ -179,4 +180,56 @@
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
+}
+
+/* Mobile Overlay */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 39;
+  backdrop-filter: blur(2px);
+}
+
+/* Mobile Close Button */
+.sidebar-close-btn {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: #1e293b;
+  color: #94a3b8;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sidebar-close-btn:hover {
+  background: #334155;
+  color: #ffffff;
+}
+
+/* Mobile Styles */
+@media (max-width: 1023px) {
+  .sidebar-container {
+    transform: translateX(-100%);
+  }
+
+  .sidebar-container.sidebar-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay {
+    display: block;
+  }
+
+  .sidebar-close-btn {
+    display: flex;
+  }
 }
