@@ -7,10 +7,10 @@ export const Breadcrumb: React.FC = () => {
   const pathnames = location.pathname.split('/').filter((x) => x);
 
   return (
-    <nav className="flex items-center gap-2 text-xs text-slate-500 py-3 px-6 bg-slate-50/50 border-b border-slate-100">
-      <Link to="/" className="hover:text-indigo-600 flex items-center gap-1">
+    <nav className="flex items-center gap-1.5 text-xs text-slate-500 py-2.5 px-4 md:px-6 md:py-3 bg-slate-50/50 border-b border-slate-100 overflow-x-auto">
+      <Link to="/" className="hover:text-indigo-600 flex items-center gap-1 flex-shrink-0">
         <Home className="w-3.5 h-3.5" />
-        <span>Home</span>
+        <span className="hidden md:inline">Home</span>
       </Link>
       {pathnames.map((name, index) => {
         const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;

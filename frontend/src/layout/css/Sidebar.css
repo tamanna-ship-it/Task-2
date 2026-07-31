@@ -190,6 +190,16 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 39;
   backdrop-filter: blur(2px);
+  animation: sidebarOverlayFadeIn 0.3s ease-in-out;
+}
+
+@keyframes sidebarOverlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Mobile Close Button */

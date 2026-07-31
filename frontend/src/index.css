@@ -13,6 +13,19 @@
     color: #0f172a;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+  }
+
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Better touch targets for mobile (touch devices only) */
+@media (hover: none) and (pointer: coarse) {
+  button, a, select, input[type="submit"], input[type="button"] {
+    min-height: 44px;
   }
 }
 
@@ -31,10 +44,84 @@
   40%, 80% { transform: translateX(4px); }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .animate-spin {
   animation: spin 1s linear infinite;
 }
 
 .animate-shake {
   animation: shake 0.4s ease-in-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Mobile-friendly global overrides */
+@media (max-width: 640px) {
+  /* Make tables horizontally scrollable on mobile */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Reduce card padding on mobile */
+  .card-responsive {
+    padding: 1rem !important;
+  }
+
+  /* Make filter sections stack better on mobile */
+  .filter-group-responsive {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .filter-group-responsive .filter-item {
+    width: 100%;
+  }
+
+  /* Make grid items more compact on mobile */
+  .grid-compact {
+    gap: 0.75rem;
+  }
+
+  /* Better dropdown positioning on mobile */
+  .dropdown-mobile-full {
+    position: fixed !important;
+    left: 1rem !important;
+    right: 1rem !important;
+    top: auto !important;
+    bottom: auto !important;
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  /* Calendar cell compact on mobile */
+  .calendar-cell-mobile {
+    min-height: 60px !important;
+    padding: 0.4rem !important;
+  }
+
+  /* Modal full-width on mobile */
+  .modal-mobile {
+    margin: 0 !important;
+    border-radius: 1rem 1rem 0 0 !important;
+    max-height: 85vh !important;
+    width: 100% !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    transform: none !important;
+  }
+
+  /* Hide secondary text on mobile */
+  .text-secondary-mobile {
+    display: none;
+  }
 }
