@@ -12,8 +12,22 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Enable CORS for frontend dev server
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://127.0.0.1:5173",
+  "http://localhost:3000",
+  "https://task-2-1-1lzd.onrender.com"
+];
+
 app.use(cors({
-  origin: ['http://localhost:5174','http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:3000'],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
 
