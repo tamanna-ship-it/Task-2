@@ -21,7 +21,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 export const Sidebar: React.FC = () => {
   const { user } = useAuth();
-  const { isSidebarOpen, closeSidebar } = useLayout();
+  const { isSidebarOpen, closeSidebar, registerSidebar } = useLayout();
   const isOwner = user?.role === 'owner';
   const isManager = user?.role === 'manager';
   const menuItems = isOwner ? ownerMenu : isManager ? managerMenu : staffMenu;
@@ -31,7 +31,11 @@ export const Sidebar: React.FC = () => {
       {/* Mobile Overlay */}
       {isSidebarOpen && <div className="sidebar-overlay" onClick={closeSidebar} />}
 
-      <aside className={`sidebar-container ${isSidebarOpen ? 'sidebar-open' : ''}`}>
+      <aside
+        ref={registerSidebar}
+        className={`sidebar-container ${isSidebarOpen ? 'sidebar-open' : ''}`}
+        aria-hidden={!isSidebarOpen}
+      >
         {/* Close Button for Mobile */}
         <button className="sidebar-close-btn" onClick={closeSidebar} aria-label="Close sidebar">
           <X className="w-5 h-5" />

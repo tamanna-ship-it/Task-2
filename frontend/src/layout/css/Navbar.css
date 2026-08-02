@@ -235,14 +235,16 @@
   }
 
   .hamburger-btn {
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
   }
 
   .navbar-search {
     max-width: 160px;
     padding: 0.35rem 0.6rem;
     border-radius: 10px;
+    min-height: 40px;
   }
 
   .search-input {
@@ -259,26 +261,29 @@
   }
 
   .icon-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
   }
 
   .avatar-circle {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
   }
 
   .logout-btn {
-    padding: 0.35rem;
-    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 10px;
+    justify-content: center;
   }
 
   .notification-dot {
-    top: 4px;
-    right: 4px;
-    width: 6px;
-    height: 6px;
+    top: 8px;
+    right: 8px;
+    width: 7px;
+    height: 7px;
   }
 }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '@/utils/authContext';
 import { useNavigate } from 'react-router-dom';
+import { useIsMobile } from '@/utils/hooks/useIsMobile';
 import {
   DollarSign, Calendar, Users, UserPlus, UserCheck, UserX,
   Clock, CheckCircle, XCircle, RefreshCw, CreditCard, ArrowUp, ArrowDown,
@@ -99,6 +100,7 @@ const PerfBar = ({ label, value, pct, color, textColor }: any) => (
 export const OwnerDashboardPage: React.FC = () => {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
+  const isMobile = useIsMobile(640);
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -189,7 +191,7 @@ export const OwnerDashboardPage: React.FC = () => {
               <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-slate-400"></span>Out</span>
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[420px] overflow-y-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {staff.map((s: any) => (
               <div key={s.id} className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <div className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
@@ -224,7 +226,7 @@ export const OwnerDashboardPage: React.FC = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>LIVE
             </span>
           </div>
-          <div className="space-y-3 max-h-[420px] overflow-y-auto">
+          <div className="space-y-3">
             {sf.map((x: any) => (
               <div key={x.id} className={`p-3 rounded-xl border ${x.status === 'busy' ? 'bg-indigo-50 border-indigo-100' : 'bg-slate-50 border-slate-100'}`}>
                 <div className="flex items-center justify-between mb-1">
@@ -259,8 +261,8 @@ export const OwnerDashboardPage: React.FC = () => {
           <div style={{ width: '100%', height: 260, minHeight: 260 }}>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
-                <Pie data={rev} dataKey="value" nameKey="label" cx="50%" cy="50%" outerRadius={80}
-                  label={({ label, percentage }: any) => `${label} ${percentage}%`}>
+                <Pie data={rev} dataKey="value" nameKey="label" cx="50%" cy="50%" outerRadius={isMobile ? 60 : 80}
+                  label={isMobile ? false : ({ label, percentage }: any) => `${label} ${percentage}%`}>
                   {rev.map((_: any, idx: number) => <Cell key={idx} fill={['#6366f1', '#f59e0b', '#10b981'][idx % 3]} />)}
                 </Pie>
                 <Tooltip formatter={(value: any) => `₹${Number(value).toLocaleString('en-IN')}`} />
@@ -276,7 +278,8 @@ export const OwnerDashboardPage: React.FC = () => {
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie data={[{ name: 'New', value: m.newClients || 124 }, { name: 'Returning', value: m.returningClients || 768 }]}
-                  dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                  dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={isMobile ? 60 : 80}
+                  label={isMobile ? false : true}>
                   <Cell fill="#6366f1" /><Cell fill="#10b981" />
                 </Pie>
                 <Tooltip /><Legend />
@@ -333,7 +336,7 @@ export const OwnerDashboardPage: React.FC = () => {
           <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
             <Activity className="w-5 h-5 text-indigo-500" /> Recent Activity
           </h2>
-          <div className="space-y-3 max-h-[300px] overflow-y-auto">
+          <div className="space-y-3">
             {logs.map((log: any, idx: number) => (
               <div key={idx} className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <div className="w-2 h-2 rounded-full bg-indigo-500 mt-1.5 flex-shrink-0" />
